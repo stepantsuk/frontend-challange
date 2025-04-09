@@ -9,3 +9,5 @@
   * [event](js/event.md)
   * [всплытие и погружение событий](js/event_bubbling_capturing.md)
   * [делегирование событий](js/event_delegation.md)
+* [programming-theory](programming-theory/README.md)
+  * [oop](programming-theory/oop.md)
