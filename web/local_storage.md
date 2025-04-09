@@ -1,5 +1,7 @@
 # LocalStorage, sessionStorage
 
+---
+
 Объекты веб-хранилища localStorage и sessionStorage позволяют хранить пары ключ/значение в браузере.
 
 sessionStorage - данные, которые в них записаны, сохраняются после обновления страницы
