@@ -12,3 +12,4 @@
 * [programming-theory](programming-theory/README.md)
   * [oop](programming-theory/oop.md)
   * [DRY](programming-theory/dry.md)
+  * [KISS-YAGNI-OKKAMA](programming-theory/kiss-yagni-okkama.md)
