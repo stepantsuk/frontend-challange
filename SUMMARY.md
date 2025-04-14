@@ -11,3 +11,4 @@
   * [делегирование событий](js/event_delegation.md)
 * [programming-theory](programming-theory/README.md)
   * [oop](programming-theory/oop.md)
+  * [DRY](programming-theory/dry.md)
