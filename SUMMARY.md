@@ -1,8 +1,6 @@
 # Table of contents
 
-***
-
-* [web](web/README.md)
+* [web](README.md)
   * [cookie](web/cookies.md)
   * [local storage](web/local_storage.md)
 * [js](js/README.md)
