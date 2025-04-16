@@ -11,4 +11,4 @@
   * [oop](programming-theory/oop.md)
   * [DRY](programming-theory/dry.md)
   * [KISS-YAGNI-OKKAMA](programming-theory/kiss-yagni-okkama.md)
-  * [SOLID](programming-theory/solid/solid.md)
+  * [SOLID](programming-theory/solid/SUMMARY.md)
