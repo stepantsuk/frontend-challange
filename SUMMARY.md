@@ -19,3 +19,4 @@
         * [D - Dependency Inversion Principle](programming-theory/solid/dip.md)
 * [web-development](web-development/README.md)
     * [networking glossary](web-development/networking_glossary.md)
+    * [TLS](web-development/tls.md)
