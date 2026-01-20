@@ -22,3 +22,4 @@
     * [TLS](web-development/tls.md)
     * [DNS](web-development/dns.md)
     * [OSI](web-development/osi.md)
+    * [Serialization](web-development/serialization.md)
