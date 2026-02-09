@@ -33,5 +33,4 @@
     * [XMLHttpRequest](network-api/XMLHttpRequest.md)
     * [beacon api](network-api/beacon-api.md)
     * [URL api](network-api/url.md)
-    * [page visibility](network-api/page-visibility.md)
 
