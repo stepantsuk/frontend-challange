@@ -5,20 +5,28 @@
 При переключении между вкладками, web страница переходит в фоновый режим и поэтому не видна пользователю.
 
 Page Visibility API позволяет определять, активна ли вкладка/окно браузера через document.visibilityState и событие visibilitychange. Критически важно для оптимизации: при скрытии страницы нужно приостанавливать медиа, анимации, сетевые запросы и фоновые задачи. В современных приложениях интегрируется с аналитикой, bfcache и другими API (Wake Lock, Picture-in-Picture). Особое внимание нужно уделять мобильным браузерам и восстановлению из кэша.
+
+Несколько способов использования Page Visibility API.
+
+На сайте есть слайдер изображений с автопрокруткой, которую можно поставить на паузу, когда пользователь перешёл на другую вкладку
+Приложение выводит информацию в реальном времени, которую можно не обновлять, пока страница не видна, тем самым уменьшить количество запросов на сервер
+Странице нужно понять, когда она должна быть отрисована, так что можно вести точный подсчёт количества просмотров
+Сайту нужно выключить звук, когда устройство в режиме ожидания (пользователь нажал кнопку включения, чтобы погасить экран)
 ___
 
 ## Ключевые свойства и события
 
-1. Основное свойство: document.visibilityState
-   Возвращает строку с состоянием:
-   'visible' — страница видима (вкладка активна, окно не свернуто)
-   'hidden' — страница скрыта (вкладка неактивна, окно свернуто, переключение на другое приложение)
-2. Упрощенное свойство: document.hidden
-   Булево значение для обратной совместимости:
-   true — страница скрыта
-   false — страница видима
-3. Событие: visibilitychange
-   Срабатывает при изменении состояния видимости:
+**interface** :
+- Document.hidden
+- Document.visibilityState
+    - visible - The page content may be at least partially visible. In practice this means that the page is the foreground tab of a non-minimized window.
+
+    - hidden - The page's content is not visible to the user, either due to the document's tab being in the background or part of a window that is minimized, or because the device's screen is off.
+
+    - prerender - The page's content is being prerendered and is not visible to the user. A document may start in the prerender state, but will never switch to this state from any other state, since a document can only prerender once.
+
+    - unloaded - The page is in the process of being unloaded from memory.
+- Document.onvisibilitychange
 
 ```js
 document.addEventListener('visibilitychange', () => {
@@ -29,6 +37,53 @@ document.addEventListener('visibilitychange', () => {
   }
 });
 ```
+___
+
+## Критические нюансы
+
+1. Когда страница считается скрытой:
+
+- Переключение на другую вкладку
+- Сворачивание окна браузера
+- Переключение на другое приложение (Alt+Tab)
+- Браузер в полноэкранном режиме, но не активен
+
+Не считается: перекрытие другим окном (если оба окна браузера)
+
+2. Производительность и батарея
+
+```javascript
+   // Плохо: постоянный polling
+setInterval(() => {
+  if (!document.hidden) {
+    updateDashboard(); // Бесполезная нагрузка в фоне
+  }
+}, 1000);
+
+// Хорошо: использовать видимость
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden) {
+    updateDashboard();
+    startLiveUpdates();
+  } else {
+    stopLiveUpdates();
+  }
+});
+```
+
+3. Проблемы с мобильными устройствами
+```javascript
+   // На iOS Safari есть особенности:
+   document.addEventListener('visibilitychange', () => {
+   // На iOS страница становится hidden при блокировке экрана
+   // или переходе в домашний экран, но не всегда
+   if (document.hidden) {
+   // Сохраняем состояние формы
+   localStorage.setItem('draft', formData);
+   }
+   });
+```
+
 
 ## Cценарии использования
 
@@ -111,6 +166,7 @@ document.addEventListener('visibilitychange', () => {
   }
 });
 ```
+
 
 ___
 
@@ -203,52 +259,5 @@ const getVisibilityState = () => {
     supported: false
   };
 };
-```
-
-___
-
-## Критические нюансы
-
-1. Когда страница считается скрытой:
-
-- Переключение на другую вкладку
-- Сворачивание окна браузера
-- Переключение на другое приложение (Alt+Tab)
-- Браузер в полноэкранном режиме, но не активен
-
-Не считается: перекрытие другим окном (если оба окна браузера)
-
-2. Производительность и батарея
-
-```javascript
-   // Плохо: постоянный polling
-setInterval(() => {
-  if (!document.hidden) {
-    updateDashboard(); // Бесполезная нагрузка в фоне
-  }
-}, 1000);
-
-// Хорошо: использовать видимость
-document.addEventListener('visibilitychange', () => {
-  if (!document.hidden) {
-    updateDashboard();
-    startLiveUpdates();
-  } else {
-    stopLiveUpdates();
-  }
-});
-```
-
-3. Проблемы с мобильными устройствами
-```javascript
-   // На iOS Safari есть особенности:
-   document.addEventListener('visibilitychange', () => {
-   // На iOS страница становится hidden при блокировке экрана
-   // или переходе в домашний экран, но не всегда
-   if (document.hidden) {
-   // Сохраняем состояние формы
-   localStorage.setItem('draft', formData);
-   }
-   });
 ```
 
