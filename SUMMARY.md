@@ -23,6 +23,7 @@
     * [DNS](web-development/dns.md)
     * [OSI](web-development/osi.md)
     * [Serialization](web-development/serialization.md)
+    * [XML](web-development/xml.md)
 * [browser](browser/README.md)
     * [usefully links](browser/usefully-links.md)
     * [drag and drop](browser/drag-n-drop.md)
