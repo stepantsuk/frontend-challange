@@ -40,3 +40,4 @@
     * [service worker](pwa/service_worker.md)
     * [cache](pwa/cache.md)
     * [other](pwa/other.md)
+
