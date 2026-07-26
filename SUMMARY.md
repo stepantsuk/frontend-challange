@@ -24,6 +24,7 @@
     * [OSI](web-development/osi.md)
     * [Serialization](web-development/serialization.md)
     * [XML](web-development/xml.md)
+    * [CORS](web-development/cors.md)
 * [browser](browser/README.md)
     * [usefully links](browser/usefully-links.md)
     * [drag and drop](browser/drag-n-drop.md)
@@ -34,9 +35,8 @@
     * [XMLHttpRequest](network-api/XMLHttpRequest.md)
     * [beacon api](network-api/beacon-api.md)
     * [URL api](network-api/url.md)
-* [network-api](pwa/README.md)
+* [PWA](pwa/README.md)
     * [pwa](pwa/pwa.md)
     * [service worker](pwa/service_worker.md)
     * [cache](pwa/cache.md)
     * [other](pwa/other.md)
-
